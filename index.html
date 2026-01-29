@@ -399,6 +399,29 @@
                     content: "Kategori: {LSD}"
                 }
             });
+
+             // Layer LBS
+             const LBS = new GeoJSONLayer({
+                url: "https://raw.githubusercontent.com/codemrc/KRA_RTR/refs/heads/main/LBS2025karanganyarmultypoligonLL.json",
+                title: "LBS Kabupaten Karanganyar",
+                renderer: {
+                    type: "simple",
+                    symbol: {
+                        type: "simple-fill",
+                        color: [0, 128, 0, 0.2],  // Hijau dengan transparansi
+                        outline: {
+                            color: [0, 0, 0, 1], // Outline hitam
+                            width: 1
+                        }
+                    }
+                },
+                visible: true,
+                popupTemplate: {
+                    title: "LSB",
+                    content: "Kategori: {LSB}"
+                }
+            });
+
             // Layer Lereng
             const lereng = new GeoJSONLayer({
                 url: "https://raw.githubusercontent.com/codemrc/KRA_RTR/main/lereng.json",
@@ -1650,6 +1673,7 @@ function convertLatLonToTM3(latitude, longitude, zone) {
             map.add(kemampuanTanah);
             map.add(PenggunaanTanah)
             map.add(LSD);
+            map.add(LBS);
             map.add(RTRW);
             
             // Menambahkan LayerList untuk menampilkan semua layer kecuali layer "Persil"
@@ -1657,7 +1681,7 @@ function convertLatLonToTM3(latitude, longitude, zone) {
                 view: view,
                 listItemCreatedFunction: (event) => {
                 // Menyembunyikan layer LSD, kemampuanTanah, dan lereng dari LayerList
-                const hiddenLayers = [LSD, PenggunaanTanah,kemampuanTanah, lereng,persilGroup,BidangPTP];
+                const hiddenLayers = [LBS,LSD, PenggunaanTanah,kemampuanTanah, lereng,persilGroup,BidangPTP];
                 if (hiddenLayers.includes(event.item.layer)) 
                     {event.item.visible = false;}
                 }
